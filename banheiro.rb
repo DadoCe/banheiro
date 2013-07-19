@@ -41,15 +41,17 @@ class Banheiro
 	end
 
 	private
+	VAGO = 0
+	UM, OCUPADO = 1
 	def encontre_mictorio_vago_com_a_vizinhanca_vaga(mictorios)    
-		mictorio_esquerda = mictorios.index(0)
-		mictorio_centro = mictorio_esquerda + 1    
-		mictorio_direita = mictorio_centro + 1
+		mictorio_esquerda = mictorios.index(VAGO)
+		mictorio_centro = mictorio_esquerda + UM    
+		mictorio_direita = mictorio_centro + UM
 
-	    if mictorios[mictorio_centro] == 0 && mictorios[mictorio_direita] == 0
-	    	return (mictorio_centro + 1).to_s
-	    elsif mictorios[mictorio_direita .. @mictorios.size].index(0) 
-	    	mictorios[mictorio_esquerda] = 1	
+	    if mictorios[mictorio_centro] == VAGO && mictorios[mictorio_direita] == VAGO
+	    	return (mictorio_centro + UM).to_s
+	    elsif mictorios[mictorio_direita .. @mictorios.size].index(VAGO) 
+	    	mictorios[mictorio_esquerda] = OCUPADO	
 	    	return encontre_mictorio_vago_com_a_vizinhanca_vaga mictorios
 		end
 		"Nao encontrado"
